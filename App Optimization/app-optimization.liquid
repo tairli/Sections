@@ -13,16 +13,22 @@
 
   for block in section.blocks
     assign url = block.settings.url | replace: '/', '\/'
+    
+    if content_for_header contains url or block.settings.not_an_app
+      assign header_cheked = true
+    else
+      assign header_cheked = true
+    endif 
 
-    if block.settings[block_key] == true and content_for_header contains url
+    if block.settings[block_key] == true and header_checked
       assign arr_block = block | concat: arr_block
     endif
 
-    if block.settings[scroll_key] == true and content_for_header contains url
+    if block.settings[scroll_key] == true and header_checked
       assign arr_scroll = block | concat: arr_scroll
     endif
 
-    if block.settings[interaction_key] == true and content_for_header contains url
+    if block.settings[interaction_key] == true and header_checked
       assign arr_interaction = block | concat: arr_interaction
     endif
   endfor
@@ -516,6 +522,12 @@
             "label": "App ScriptTag URL",
             "placeholder": "e.g. shopifycdn.com/assets/v4/spr.js",
             "info": "Use partial URL, e.g: shopifycdn.com/assets/v4/spr.js"
+          },
+          {
+            "type": "checkbox",
+            "id":   "not_an_app",
+            "label":  "This is not a main App script",
+            "info":   "Allows control of scripts which are not direrctly loaded via Scrip Tags"
           },
           {
             "type": "header",
