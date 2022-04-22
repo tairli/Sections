@@ -15,9 +15,9 @@
     assign url = block.settings.url | replace: '/', '\/'
     
     if content_for_header contains url or block.settings.not_an_app
-      assign header_cheked = true
+      assign header_checked = true
     else
-      assign header_cheked = true
+      assign header_checked = true
     endif 
 
     if block.settings[block_key] == true and header_checked
